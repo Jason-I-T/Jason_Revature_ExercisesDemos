@@ -13,12 +13,17 @@ class Program
 {
     static void Main(string[] args)
     {
-        int[] pikaMoves = {0, 15, 20, 25};
+        //int[] pikaMoves = {0, 15, 20, 25};
         int[] bulbaMoves = {1, 10, 15, 20};
         
-        Pokemon pikachu = new Pokemon("Pikachu", 100, pikaMoves);
-        Pokemon bulbasaur = new Pokemon("Bulbasaur", 100, bulbaMoves);
+        // Pokemon pikachu = new Pokemon("Pikachu", 100, pikaMoves);
+        // Pokemon bulbasaur = new Pokemon("Bulbasaur", 100, bulbaMoves);
 
-        Console.WriteLine(PokeBattle.Battle(pikachu, bulbasaur));
+
+        //Pikachu pika = new Pikachu();
+        Pokemon userPoke = new Pikachu();
+        Bulbasaur bulba = new Bulbasaur("Bulbasaur", "Grass", 100, bulbaMoves);
+
+        Console.WriteLine(PokeBattle.Battle(userPoke, bulba));
     }
 }

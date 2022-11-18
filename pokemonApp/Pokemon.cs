@@ -1,5 +1,14 @@
 namespace pokemonApp;
 
+/*
+TODO: 
+*Have a party of pokemon
+    need derived class of pokemon (3 diff)
+    put 3 in list
+*Choose which pokemon to use
+*The pokemon that wins, evolves
+*/
+
 public class Pokemon 
 {
     //Fields
@@ -9,7 +18,7 @@ public class Pokemon
     public int[] moves {get; set;}
     int weight;
     int level;
-    string type;
+    public string type {get; set;}
     
     Dictionary<string,int> moveList;
 
@@ -46,7 +55,7 @@ public class Pokemon
     }
 
     //This method is static. It can be called with dot-notation using the name of the class itself.  
-    public static void Sound() // Make this required to be overriden by child
+    public virtual void Sound() // Make this required to be overriden by child
     {
         Console.WriteLine("*pokemon noises*");
     }
@@ -57,4 +66,6 @@ public class Pokemon
         Sound();
         return $"My name is {name}. I am a pokemon.";
     }
+
+    //give item.. check a certain pa
 }
