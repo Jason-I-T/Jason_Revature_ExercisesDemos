@@ -46,7 +46,7 @@ public class Pokemon
     }
 
     //This method is static. It can be called with dot-notation using the name of the class itself.  
-    public static void Sound()
+    public static void Sound() // Make this required to be overriden by child
     {
         Console.WriteLine("*pokemon noises*");
     }
@@ -57,5 +57,4 @@ public class Pokemon
         Sound();
         return $"My name is {name}. I am a pokemon.";
     }
-
 }
