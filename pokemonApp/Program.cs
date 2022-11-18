@@ -15,15 +15,24 @@ class Program
     {
         //int[] pikaMoves = {0, 15, 20, 25};
         int[] bulbaMoves = {1, 10, 15, 20};
-        
-        // Pokemon pikachu = new Pokemon("Pikachu", 100, pikaMoves);
-        // Pokemon bulbasaur = new Pokemon("Bulbasaur", 100, bulbaMoves);
 
-
-        //Pikachu pika = new Pikachu();
         Pokemon userPoke = new Pikachu();
-        Bulbasaur bulba = new Bulbasaur("Bulbasaur", "Grass", 100, bulbaMoves);
+        Pokemon cpuPokemon = new Bulbasaur();
 
-        Console.WriteLine(PokeBattle.Battle(userPoke, bulba));
+        while(true) {
+            bool win = PokeBattle.Battle(userPoke, cpuPokemon);
+             if(win) {
+                // evolve, go again
+                Console.WriteLine("Congrats! You won...somethings happening...");
+                string prevName = userPoke.name;
+                userPoke = new Raichu();
+                Console.WriteLine($"{prevName} evolved into {userPoke.name}");
+             } else {
+                Console.WriteLine("You lost!");
+             }
+             // CPU gets new pokemon
+             // next iteration
+        }
+
     }
 }

@@ -2,11 +2,12 @@ namespace pokemonApp;
 
 public class Bulbasaur : Pokemon {
 
-    public Bulbasaur (string name, string type, int hp, int[] moves) {
-        base.name = name;
-        base.type = type;
-        base.hp = hp;
-        base.moves = moves;
+    public Bulbasaur () {
+        this.name = "Bulbasaur";
+        this.type = "Grass";
+        this.hp = 100;
+        int[] moves = {10, 20, 30, 40};
+        this.moves = moves;
     }
 
     public override void Sound() {

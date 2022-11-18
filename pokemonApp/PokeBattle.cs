@@ -1,7 +1,11 @@
 namespace pokemonApp;
 
 public class PokeBattle {
-    public static string Battle(Pokemon a, Pokemon b) {
+
+    /* Win - return true, Loss or Run - return false
+       a - user, b - computer 
+    */
+    public static bool Battle(Pokemon a, Pokemon b) {
         Random rand = new Random();
         Random critChance = new Random();
         int aHP = a.hp, bHP = b.hp;
@@ -20,7 +24,10 @@ public class PokeBattle {
             // TODO: Make validation and crit calculation its own methods...
             if(choice.Equals("1") || choice.Equals("2") || choice.Equals("3") || choice.Equals("4") ) {
                     bool pleaseWork = Int32.TryParse(choice, out moveIndex);
-            } else if(choice.Equals("RUN")) return "You have fleed the battle\n\n";
+            } else if(choice.Equals("RUN")) {
+                    Console.WriteLine("You have fleed the battle\n\n");
+                    return false;        
+            } 
             else {
                 Console.WriteLine("ERROR: invalid input");
                 continue;
@@ -44,13 +51,13 @@ public class PokeBattle {
                 Console.WriteLine($"{b.name} did {b.moves[compChoice]} damange to {a.name}\n");
 
             if(aHP <= 0)
-                return "You lose!!\n"; 
+                return false; 
             if(bHP <= 0) 
-                return "You win!!\n";
+                return true;
 
         } while(aHP > 0);
         
-        return "";
+        return false;
     }
 
     // Take in random object... crit has 1 in n chance to happen... modifier will be included when we subtract health
