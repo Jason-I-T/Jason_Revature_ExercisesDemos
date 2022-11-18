@@ -1,4 +1,6 @@
 namespace pokemonApp;
+using System;
+using System.Text.RegularExpressions;
 
 public class PokeBattle {
 
@@ -22,12 +24,23 @@ public class PokeBattle {
             string? choice = Console.ReadLine();
 
             // TODO: Make validation and crit calculation its own methods...
-            if(choice.Equals("1") || choice.Equals("2") || choice.Equals("3") || choice.Equals("4") ) {
-                    bool pleaseWork = Int32.TryParse(choice, out moveIndex);
-            } else if(choice.Equals("RUN")) {
-                    Console.WriteLine("You have fleed the battle\n\n");
-                    return false;        
-            } 
+            // if(choice.Equals("1") || choice.Equals("2") || choice.Equals("3") || choice.Equals("4") ) {
+            //         bool pleaseWork = Int32.TryParse(choice, out moveIndex);
+            // } else if(choice.Equals("RUN")) {
+            //         Console.WriteLine("You have fleed the battle\n\n");
+            //         return false;        
+            // } 
+            // else {
+            //     Console.WriteLine("ERROR: invalid input");
+            //     continue;
+            // }
+            if(validateInput(choice)) {
+                if(choice.Equals("RUN")) { 
+                        Console.WriteLine("You have fleed the battle\n\n");
+                        return false; 
+                    }
+                bool pleaseWork = Int32.TryParse(choice, out moveIndex);
+            }
             else {
                 Console.WriteLine("ERROR: invalid input");
                 continue;
@@ -68,5 +81,15 @@ public class PokeBattle {
         }
 
         return modifier;
+    }
+
+    private static bool validateInput(string input) {
+        Regex re = new Regex(@"[1234]");
+        if(re.IsMatch(input) && input.Length == 1) {
+                    return true;      
+            } 
+            else {
+                return false;
+            }
     }
 }
