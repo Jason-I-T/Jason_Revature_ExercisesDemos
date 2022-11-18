@@ -21,15 +21,21 @@ class Program
 
         while(true) {
             bool win = PokeBattle.Battle(userPoke, cpuPokemon);
-             if(win) {
+            if(win) {
                 // evolve, go again
                 Console.WriteLine("Congrats! You won...somethings happening...");
                 string prevName = userPoke.name;
                 userPoke = new Raichu();
                 Console.WriteLine($"{prevName} evolved into {userPoke.name}");
-             } else {
+            } else {
                 Console.WriteLine("You lost!");
-             }
+            }
+
+            Console.WriteLine("Press enter to continue, or type something to exit...");
+            string cont = Console.ReadLine();
+            if(cont.Length > 0)
+                break;
+            //  Console.WriteLine()
              // CPU gets new pokemon
              // next iteration
         }
