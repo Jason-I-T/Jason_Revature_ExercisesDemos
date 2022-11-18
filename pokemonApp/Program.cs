@@ -15,9 +15,10 @@ class Program
     {
         int[] pikaMoves = {0, 15, 20, 25};
         int[] bulbaMoves = {1, 10, 15, 20};
+        
         Pokemon pikachu = new Pokemon("Pikachu", 100, pikaMoves);
         Pokemon bulbasaur = new Pokemon("Bulbasaur", 100, bulbaMoves);
 
-        Console.WriteLine(Pokemon.Battle(pikachu, bulbasaur));
+        Console.WriteLine(PokeBattle.Battle(pikachu, bulbasaur));
     }
 }
