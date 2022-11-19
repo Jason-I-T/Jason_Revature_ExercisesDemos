@@ -13,13 +13,10 @@ public class PokeBattle {
         int aHP = a.hp, bHP = b.hp;
         Console.WriteLine($"Started battle between {a.name} and {b.name}!");
         
-
         int moveIndex = 0;
         do {
-
             Console.WriteLine($"Your HP: {aHP}\nEnemey HP: {bHP}");
             Console.WriteLine("Choose Move, Enter 1-4...RUN to flee\n");
-
 
             string? choice = Console.ReadLine();
             if(validateInput(choice)) {
@@ -28,9 +25,11 @@ public class PokeBattle {
             } else { continue; }
 
             // TODO: Make damage calculation its own method
-
+            // private void DamageCalc(hp, moves, move index, modifiers)
             // User damage calculation
             int aCrit = CritCalc(critChance, 10);
+            int[] modifiers = {aCrit};
+
             bHP -= a.moves[--moveIndex] * aCrit;
             if (aCrit > 1) 
                 Console.WriteLine($"\nIt's a critical hit! {a.name} did {a.moves[moveIndex]*aCrit} damage to {b.name}");
@@ -59,13 +58,11 @@ public class PokeBattle {
     // Take in random object... crit has 1 in n chance to happen... modifier will be included when we subtract health
     private static int CritCalc(Random rand, int n) { 
         int modifier = 1;
-        if (rand.Next(0, n) == 1) { // is a crit
-            modifier = 2;
-        }
-
+        if (rand.Next(0, n) == 1) { modifier = 2; }
         return modifier;
     }
 
+    // Returns true if user enters 1-4, or RUN
     private static bool validateInput(string input) {
         Regex moveCheck = new Regex(@"[1234]");
         Regex runCheck = new Regex(@"RUN");
@@ -74,9 +71,8 @@ public class PokeBattle {
         } else if(runCheck.IsMatch(input)) {
             Console.WriteLine("You have fleed the battle\n\n");
             return true;
-        } 
-        else {
-            Console.WriteLine("ERROR: invalid input");
+        } else {
+            Console.WriteLine("ERROR: invalid input (1-4, or RUN");
             return false;
         }
     }
