@@ -22,29 +22,12 @@ public class PokeBattle {
 
 
             string? choice = Console.ReadLine();
-
-            // TODO: Make validation and crit calculation its own methods...
-            // if(choice.Equals("1") || choice.Equals("2") || choice.Equals("3") || choice.Equals("4") ) {
-            //         bool pleaseWork = Int32.TryParse(choice, out moveIndex);
-            // } else if(choice.Equals("RUN")) {
-            //         Console.WriteLine("You have fleed the battle\n\n");
-            //         return false;        
-            // } 
-            // else {
-            //     Console.WriteLine("ERROR: invalid input");
-            //     continue;
-            // }
             if(validateInput(choice)) {
-                if(choice.Equals("RUN")) { 
-                        Console.WriteLine("You have fleed the battle\n\n");
-                        return false; 
-                    }
+                if(choice.Equals("RUN")) { return false; }
                 bool pleaseWork = Int32.TryParse(choice, out moveIndex);
-            }
-            else {
-                Console.WriteLine("ERROR: invalid input");
-                continue;
-            }
+            } else { continue; }
+
+            // TODO: Make damage calculation its own method
 
             // User damage calculation
             int aCrit = CritCalc(critChance, 10);
@@ -84,12 +67,17 @@ public class PokeBattle {
     }
 
     private static bool validateInput(string input) {
-        Regex re = new Regex(@"[1234]");
-        if(re.IsMatch(input) && input.Length == 1) {
-                    return true;      
-            } 
-            else {
-                return false;
-            }
+        Regex moveCheck = new Regex(@"[1234]");
+        Regex runCheck = new Regex(@"RUN");
+        if(moveCheck.IsMatch(input) && input.Length == 1) {
+            return true;      
+        } else if(runCheck.IsMatch(input)) {
+            Console.WriteLine("You have fleed the battle\n\n");
+            return true;
+        } 
+        else {
+            Console.WriteLine("ERROR: invalid input");
+            return false;
+        }
     }
 }
