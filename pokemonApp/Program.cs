@@ -1,5 +1,5 @@
 ﻿/*
-Battle imp:
+Battle:
     battle loop - two pokemon
         array of moves, each entry int value for damage... multiplier maybe based on effectiveness
         user has choice of 1-4 , does damage to computer
@@ -13,9 +13,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        //int[] pikaMoves = {0, 15, 20, 25};
-        int[] bulbaMoves = {1, 10, 15, 20};
-
         Pokemon userPoke = new Pikachu();
         Pokemon cpuPokemon = new Bulbasaur();
 
@@ -27,18 +24,11 @@ class Program
                 string prevName = userPoke.name;
                 userPoke = new Raichu();
                 Console.WriteLine($"{prevName} evolved into {userPoke.name}");
-            } else {
-                Console.WriteLine("You lost!");
-            }
+            } else { Console.WriteLine("You lost!"); }
 
             Console.WriteLine("Press enter to continue, or type something to exit...");
             string cont = Console.ReadLine();
-            if(cont.Length > 0)
-                break;
-            //  Console.WriteLine()
-             // CPU gets new pokemon
-             // next iteration
+            if(cont.Length > 0) { break; }
         }
-
     }
 }
