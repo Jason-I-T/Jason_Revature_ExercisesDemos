@@ -4,52 +4,34 @@ using System.Text.RegularExpressions;
 
 public class PokeBattle {
 
-    /* Win - return true, Loss or Run - return false
-       a - user, b - computer 
-    */
+    // user wins, return true. loss or run, return false. a=user b=computer
     public static bool Battle(Pokemon a, Pokemon b) {
         Random rand = new Random();
-        Random critChance = new Random();
         int aHP = a.hp, bHP = b.hp;
-        Console.WriteLine($"Started battle between {a.name} and {b.name}!");
+        Console.WriteLine($"Started a battle between {a.name} and {b.name}!");
         
-        int moveIndex = 0;
+        int userMove = 0;
         do {
             Console.WriteLine($"Your HP: {aHP}\nEnemey HP: {bHP}");
             Console.WriteLine("Choose Move, Enter 1-4...RUN to flee\n");
 
             string? choice = Console.ReadLine();
             if(validateInput(choice)) {
-                if(choice.Equals("RUN")) { return false; }
-                bool pleaseWork = Int32.TryParse(choice, out moveIndex);
+                bool isMove = Int32.TryParse(choice, out userMove);
+                if(!isMove) { return false; }
+                --userMove;
             } else { continue; }
 
-            // TODO: Make damage calculation its own method
-            // private void DamageCalc(hp, moves, move index, modifiers)
-            // User damage calculation
-            int aCrit = CritCalc(critChance, 10);
-            int[] modifiers = {aCrit};
+            Console.WriteLine();
+            // Player doing damage to computer
+            bHP -= DamageCalc(a, b, userMove);
+            if(bHP <= 0) { return true; }
 
-            bHP -= a.moves[--moveIndex] * aCrit;
-            if (aCrit > 1) 
-                Console.WriteLine($"\nIt's a critical hit! {a.name} did {a.moves[moveIndex]*aCrit} damage to {b.name}");
-            else 
-                Console.WriteLine($"\n{a.name} did {a.moves[moveIndex]} damange to {b.name}");
-
-            // Enemey damage calculation
-            int compChoice = rand.Next(0,4);
-            int bCrit = CritCalc(critChance, 10);
-            aHP -= b.moves[compChoice] * bCrit;
-            if (bCrit > 1) 
-                Console.WriteLine($"It's a critical hit! {b.name} did {b.moves[compChoice]*bCrit} damage to {a.name}\n");
-            else 
-                Console.WriteLine($"{b.name} did {b.moves[compChoice]} damange to {a.name}\n");
-
-            if(aHP <= 0)
-                return false; 
-            if(bHP <= 0) 
-                return true;
-
+            // Computer doing damage to player
+            int compMove = rand.Next(0,4);
+            aHP -= DamageCalc(b, a, compMove);
+            if(aHP <= 0) { return false; }
+            Console.WriteLine();     
         } while(aHP > 0);
         
         return false;
@@ -72,8 +54,29 @@ public class PokeBattle {
             Console.WriteLine("You have fleed the battle\n\n");
             return true;
         } else {
-            Console.WriteLine("ERROR: invalid input (1-4, or RUN");
+            Console.WriteLine("ERROR: invalid input (1-4, or RUN)");
             return false;
         }
+    }
+
+    // private void DamageCalc(hp, moves, move index, modifiers)
+    private static int DamageCalc(Pokemon a, Pokemon b, int i) {
+        // Calculating modifiers
+        Random rand = new Random();
+        int crit = CritCalc(rand, 10);
+
+        // Modifiers to be used in damage expression
+        int[] mod = {crit};
+
+        // Damage expression
+        int damage = a.moves[i] * mod[0];
+
+        // Output giving feedback based off modifiers
+        if (mod[0] > 1) 
+            Console.WriteLine($"It's a critical hit! {a.name} did {damage} damage to {b.name}");
+        else 
+            Console.WriteLine($"{a.name} did {damage} damage to {b.name}");        
+
+        return damage;
     }
 }
