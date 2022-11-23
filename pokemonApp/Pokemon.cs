@@ -16,8 +16,8 @@ public class Pokemon
     public string name {get; set;}
     public int hp {get; set;}
     public int[] moves {get; set;}
-    int weight;
-    int level;
+    public int weight {get; set;}
+    public int level {get; set;}
     public string type {get; set;}
     
     Dictionary<string,int> moveList;
