@@ -5,6 +5,7 @@
 
 # Custom Ignores
 PokemonList.json
+MHWItems.json
 
 # User-specific files
 *.rsuser
