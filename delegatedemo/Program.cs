@@ -31,13 +31,14 @@ namespace delegatedemo
             //Console.WriteLine($"The first name is =>{p.Fname} and the last naem is => {p.Lname}");
 
             Func<int, string, string> marksFunkyDelegate = MethodClass.AppendString;
-            string result2 = DelegateClass.RegularMethod(marksFunkyDelegate, 5, "Mark is kewl...");
+            string result2 = DelegateClass.RegularMethod(marksFunkyDelegate, 5, "Jason is kewl...");
             Console.WriteLine(result2);
 
-
-
-
-
+            Person p1 = new Person();
+            Action<Person, int, string> actionDel = MethodClass.ChangePerson;
+            actionDel += MethodClass.ChangePerson2;
+            DelegateClass.EnvokeDelRegularMethod(p1, 50, "ProfOak", actionDel);
+            Console.WriteLine($"The first name is =>{p1.Fname} and the last naem is => {p1.Lname}");
         }
     }
 }
