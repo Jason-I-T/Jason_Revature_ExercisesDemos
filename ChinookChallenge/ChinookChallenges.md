@@ -23,27 +23,37 @@
 > SELECT  BillingCountry, Count(InvoiceID) as '# Of Invoices' FROM Invoice GROUP BY BillingCountry;
 
 -- Retrieve the total sales per country, ordered by the highest total sales first.
-> SELECT BillingCountry, Count(Total) as '# Of Sales' FROM Invoice GROUP BY BillingCountry ORDER BY Count(Total) DESC;
+> SELECT BillingCountry, SUM(Total) as 'Total Sales' FROM Invoice GROUP BY BillingCountry ORDER BY SUM(Total) DESC;
 
 
 -- JOINS CHALLENGES
 -- Show all invoices of customers from brazil (mailing address not billing)
-> SELECT Customer.FirstName, Customer.LastName, Invoice.* FROM Customer LEFT JOIN Invoice ON Customer.Country = Invoice.BillingCountry WHERE Country = 'Brazil';
+> SELECT Customer.FirstName, Customer.LastName, Invoice.* FROM Customer LEFT JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId WHERE Country = 'Brazil';
 
 -- Show all invoices together with the name of the sales agent for each one
+> SELECT Employee.EmployeeId, Employee.FirstName, Employee.LastName, Invoice.* FROM Customer LEFT JOIN Employee ON SupportRepId = EmployeeId LEFT JOIN Invoice ON Invoice.CustomerId = Customer.CustomerId;
 
 -- Show all playlists ordered by the total number of tracks they have
+> SELECT P.Name, COUNT(PT.TrackId) FROM Playlist as P LEFT JOIN PlayListTrack as PT ON P.PlaylistId = PT.PlaylistId GROUP BY P.Name ORDER BY COUNT(PT.TrackId) DESC;
 
 -- Which sales agent made the most sales in 2009?
+> SELECT Employee.Firstname, Employee.Lastname, COUNT(Invoice.InvoiceId) FROM Customer LEFT JOIN Employee ON SupportRepId = EmployeeId  LEFT JOIN Invoice ON Invoice.CustomerId = Customer.CustomerId WHERE Year(InvoiceDate) = 2009 GROUP BY Employee.Firstname, Employee.Lastname ORDER BY COUNT(Invoice.InvoiceId) DESC;
+> Margaret Park (30)
 
 -- How many customers are assigned to each sales agent?
+> SELECT E.Employeeid, E.Firstname, E.Lastname, COUNT(C.CustomerId) FROM Invoice as I LEFT JOIN Customer as C ON C.CustomerId = I.CustomerId LEFT JOIN Employee as E on SupportRepId = EmployeeId GROUP BY E.Employeeid, E.Firstname, E.Lastname;
+> Jane Peacock has 146 customers, Margaret Park has 140 customers, and Steve Johnson has 126 customers.
 
 -- Which track was purchased the most ing 20010?
+> SELECT T.Name, Count(IL.TrackId) as 'Tracks Purchased' FROM Invoice AS I LEFT JOIN InvoiceLine as IL ON I.Invoiceid = IL.Invoiceid LEFT JOIN Track as T ON IL.Trackid = T.Trackid WHERE YEAR(InvoiceDate) = 2010 GROUP BY T.Name ORDER BY Count(IL.TrackId) DESC;
+> Dezesseis, Eruption, Gimme Some Truth, Onde Voce Mora?, King For A Day, The Number Of The Beast, Sure Know Something, Surrender, and No Quarter were all purchased twice in 2010.
 
 -- Show the top three best selling artists.
+> SELECT TOP 3 Ar.Name, Count(IL.TrackId) as 'Tracks Sold' FROM Artist AS Ar LEFT JOIN Album AS Al on Ar.ArtistId = Al.ArtistId LEFT JOIN Track AS T ON T.AlbumId = Al.AlbumId LEFT JOIN InvoiceLine IL on IL.TrackId = T.TrackId GROUP BY Ar.Name ORDER BY Count(IL.TrackId) DESC;
+> Iron Maiden, U2, Metallica
 
 -- Which customers have the same initials as at least one other customer?
-
+> SELECT C1.Firstname, C1.Lastname FROM Customer AS C1, Customer AS C2 WHERE SUBSTRING(C1.Firstname, 1, 1) = SUBSTRING(C2.Firstname, 1, 1) AND SUBSTRING(C1.Lastname, 1, 1) = SUBSTRING(C2.Lastname, 1, 1) GROUP BY C1.Firstname, C1.Lastname HAVING Count(C2.CustomerId) > 1;
 
 
 -- solve these with a mixture of joins, subqueries, CTE, and set operators.
