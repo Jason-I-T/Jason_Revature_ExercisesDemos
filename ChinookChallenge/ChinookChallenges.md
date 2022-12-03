@@ -38,18 +38,22 @@
 
 -- Which sales agent made the most sales in 2009?
 > SELECT Employee.Firstname, Employee.Lastname, COUNT(Invoice.InvoiceId) FROM Customer LEFT JOIN Employee ON SupportRepId = EmployeeId  LEFT JOIN Invoice ON Invoice.CustomerId = Customer.CustomerId WHERE Year(InvoiceDate) = 2009 GROUP BY Employee.Firstname, Employee.Lastname ORDER BY COUNT(Invoice.InvoiceId) DESC;
+
 > Margaret Park (30)
 
 -- How many customers are assigned to each sales agent?
 > SELECT E.Employeeid, E.Firstname, E.Lastname, COUNT(C.CustomerId) FROM Invoice as I LEFT JOIN Customer as C ON C.CustomerId = I.CustomerId LEFT JOIN Employee as E on SupportRepId = EmployeeId GROUP BY E.Employeeid, E.Firstname, E.Lastname;
+
 > Jane Peacock has 146 customers, Margaret Park has 140 customers, and Steve Johnson has 126 customers.
 
 -- Which track was purchased the most ing 20010?
 > SELECT T.Name, Count(IL.TrackId) as 'Tracks Purchased' FROM Invoice AS I LEFT JOIN InvoiceLine as IL ON I.Invoiceid = IL.Invoiceid LEFT JOIN Track as T ON IL.Trackid = T.Trackid WHERE YEAR(InvoiceDate) = 2010 GROUP BY T.Name ORDER BY Count(IL.TrackId) DESC;
+
 > Dezesseis, Eruption, Gimme Some Truth, Onde Voce Mora?, King For A Day, The Number Of The Beast, Sure Know Something, Surrender, and No Quarter were all purchased twice in 2010.
 
 -- Show the top three best selling artists.
 > SELECT TOP 3 Ar.Name, Count(IL.TrackId) as 'Tracks Sold' FROM Artist AS Ar LEFT JOIN Album AS Al on Ar.ArtistId = Al.ArtistId LEFT JOIN Track AS T ON T.AlbumId = Al.AlbumId LEFT JOIN InvoiceLine IL on IL.TrackId = T.TrackId GROUP BY Ar.Name ORDER BY Count(IL.TrackId) DESC;
+
 > Iron Maiden, U2, Metallica
 
 -- Which customers have the same initials as at least one other customer?
