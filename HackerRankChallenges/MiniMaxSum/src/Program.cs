@@ -3,6 +3,10 @@
  * calculated by summing exactly four of the five integers. Then print the respective 
  * minimum and maximum values as a single line of two space-separated long integers.
  */
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace MiniMaxSum;
 class Program
 {
