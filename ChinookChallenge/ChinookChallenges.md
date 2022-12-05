@@ -65,20 +65,31 @@
 -- plan for them is the same, or different.
 
 -- 1. which artists did not make any albums at all?
+> SELECT A.Name, COUNT(AlbumId) FROM Artist AS A LEFT JOIN Album AS AL ON A.ArtistId = Al.ArtistId GROUP BY A.Name HAVING COUNT(AlbumId) = 0;
 
 -- 2. which artists did not record any tracks of the Latin genre?
+> SELECT A.Name, G.Name, COUNT(T.TrackId) AS 'Number of Songs' FROM Artist AS A LEFT JOIN Album AS Al ON A.ArtistId = Al.ArtistId LEFT JOIN Track AS T ON Al.AlbumId = T.AlbumId LEFT JOIN Genre AS G ON T.GenreId = G.GenreId WHERE G.Name != 'Latin' GROUP BY A.Name, G.Name;
 
 -- 3. which video track has the longest length? (use media type table)
+> SELECT TOP 5 Name, Milliseconds FROM Track WHERE MediaTypeId = 3 ORDER BY Milliseconds DESC;
+
+> Occupation / Precipice
 
 -- 4. find the names of the customers who live in the same city as the
 --    boss employee (the one who reports to nobody)
+> SELECT CONCAT(C.Firstname, ' ', C.Lastname) AS Cutomer, CONCAT(E.Firstname, ' ', E.Lastname) AS Boss, C.City FROM Customer AS C INNER JOIN Employee AS E ON C.City = E.City WHERE E.ReportsTo IS NULL;
+
+> Mark Philips, Edmonton
 
 -- 5. how many audio tracks were bought by German customers, and what was
 --    the total price paid for them?
+> SELECT C.Country, COUNT(IL.InvoiceLineId) AS 'Audio Tracks Purchased', SUM(I.Total) AS 'Money Made' FROM Customer AS C LEFT JOIN Invoice AS I ON C.CustomerId = I.CustomerId LEFT JOIN InvoiceLine AS IL ON I.InvoiceId = IL.InvoiceId WHERE C.Country = 'Germany' GROUP BY C.Country;
+
+> 152 tracks purchased, $1392.48 made
 
 -- 6. list the names and countries of the customers supported by an employee
 --    who was hired younger than 35.
-
+> SELECT CONCAT(C.Firstname, ' ', C.Lastname) AS 'Customer', C.Country, E.EmployeeId, CONCAT(E.Firstname, ' ', E.Lastname) AS 'Employee' FROM Customer AS C LEFT JOIN Employee AS E ON C.SupportRepId = E.EmployeeId WHERE DATEDIFF(YEAR, BirthDate, HireDate) < 35;
 
 -- DML exercises
 
