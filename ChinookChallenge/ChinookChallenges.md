@@ -94,14 +94,31 @@
 -- DML exercises
 
 -- 1. insert two new records into the employee table.
+> INSERT INTO [dbo].[Employee] ([EmployeeId], [LastName], [FirstName], [Title], [ReportsTo], [BirthDate], [HireDate], [Address], [City], [State], [Country], [PostalCode], [Phone], [Fax], [Email]) VALUES (9, N'Kong', N'King', N'IT Staff', 6, '3005/2/13', '2013/3/4', N'1000 7 ST NW', N'Lethbridge', N'AB', N'Canada', N'T1H 1Y8', N'+1 (403) 467-3351', N'+1 (403) 467-8772', N'King@chinookcorp.com');
+
+> INSERT INTO [dbo].[Employee] ([EmployeeId], [LastName], [FirstName], [Title], [ReportsTo], [BirthDate], [HireDate], [Address], [City], [State], [Country], [PostalCode], [Phone], [Fax], [Email]) VALUES (10, N'Godzilla', N'King', N'IT Staff', 6, '3001/2/13', '2013/3/11', N'575 7 ST S', N'Lethbridge', N'AB', N'Canada', N'T1H 1Y8', N'+1 (403) 467-3351', N'+1 (403) 467-8772', N'God@chinookcorp.com');
 
 -- 2. insert two new records into the tracks table.
+> INSERT INTO [dbo].[Track] ([TrackId], [Name], [AlbumId], [MediaTypeId], [GenreId], [Milliseconds], [Bytes], [UnitPrice])
+VALUES (5000, N'Toxicity', 5, 1, 3, 264829, 8646737, 0.99);
+
+> INSERT INTO [dbo].[Track] ([TrackId], [Name], [AlbumId], [MediaTypeId], [GenreId], [Milliseconds], [Bytes], [UnitPrice])
+VALUES (5001, N'Chop Suey', 5, 1, 3, 264829, 8646737, 0.99);
+
 
 -- 3. update customer Aaron Mitchell's name to Robert Walter
+> SELECT * FROM Customer WHERE Firstname = 'Aaron' AND Lastname = 'Mitchell';
+
+> UPDATE Customer SET FirstName = 'Robert', LastName = 'Walter' WHERE CustomerId = 32;
 
 -- 4. delete one of the employees you inserted.
+> SELECT * FROM Employee WHERE EmployeeId = 10;
+
+> DELETE FROM Employee WHERE EmployeeId = 10;
 
 -- 5. delete customer Robert Walter.
+> SELECT * FROM Customer WHERE CustomerId = 32;
 
+> DELETE FROM Customer WHERE CustomerId = 32;
 
 
