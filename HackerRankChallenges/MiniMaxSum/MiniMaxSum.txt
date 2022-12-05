@@ -1,0 +1,29 @@
+public static void miniMaxSum(List<int> arr)
+{
+    /* 
+        Set up our max/min values to compare with. 
+        arrSum is used for getting min/max sum 
+    */
+    long mini = long.MaxValue;
+    long max = -1;
+    
+    long arrSum = 0;
+    foreach(int x in arr) {
+        long l = (long) x;
+        arrSum += l;
+    }
+        
+    /* 
+        Store the result of our calcuation in tmp every iteration.
+        If the calcuation is less than min, update min. 
+        If the calculation is more than max, udpate max.
+    */
+    for(int i = 0; i < arr.Count(); i++) {
+        long tmp = arrSum - (long)arr[i];
+        if(tmp < mini) mini = tmp;
+        if(tmp > max) max = tmp;
+    }
+       
+    //  Print result
+    Console.WriteLine($"{mini} {max}");
+}
