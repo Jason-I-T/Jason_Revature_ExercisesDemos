@@ -1,0 +1,32 @@
+public static void countApplesAndOranges(int s, int t, int a, int b, List<int> apples, List<int> oranges)
+{
+    // Initializing names variables with arguments...
+    int startPoint = s;
+    int endPoint = t;
+    int lowerBound = a;
+    int upperBound = b;
+    
+    int appleResult = 0;
+    int orangeResult = 0;
+    
+    /* 
+        Each element in apples and oranges is the distance thrown from the 
+        tree.. iterate through the list to find which points fall in [s, t]
+        When we're done going through the lists, print the result.
+    */
+    foreach(int distanceThrown in apples) {
+        // add the distance thrown and where the tree is to get where the fruit fell
+        int point = distanceThrown + lowerBound;
+        
+        // Check if the point lands in sam's house.
+        if(startPoint <= point && point <= endPoint) ++appleResult;
+    }
+    
+    foreach(int distanceThrown in oranges) {
+        int point = distanceThrown + upperBound;
+        if(startPoint <= point && point <= endPoint) ++orangeResult;
+    }
+    
+    Console.WriteLine(appleResult);
+    Console.WriteLine(orangeResult);        
+}
