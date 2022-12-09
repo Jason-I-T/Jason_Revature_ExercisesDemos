@@ -1,0 +1,15 @@
+public static string kangaroo(int x1, int v1, int x2, int v2) {
+    /* 
+        * x1, x2 are the starting location of the pointers
+        * v1, v2 are the speed of the pointers
+        * We check if it is possible for the first pointer to
+        * catch up. 
+        * If the speed of the first pointer is faster than the second pointer
+        * AND 
+        * If the difference in the starting points and the pointer speeds are factors 
+        * of eachother; The first pointer (x1) will be able to catch up.
+        * Logic is mostly from Kindson The Tech Pro on youtube...
+        */
+    if (v1 > v2 && (x2 - x1) % (v1 - v2) == 0) return "YES";
+    else return "NO";
+}    
