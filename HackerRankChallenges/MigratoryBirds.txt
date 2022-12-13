@@ -1,0 +1,26 @@
+public static int migratoryBirds(List<int> arr)
+{
+    // Use dictionary, key is bird type (1 - 5)
+    // Iterate through arr (bird sightings), 
+    // add 1 to the value of each key for every sighting
+    // Go through the dictionary, find max.
+    Dictionary<int, int> birdSightings = new Dictionary<int, int>();
+    birdSightings.Add(1, 0);
+    birdSightings.Add(2, 0);
+    birdSightings.Add(3, 0);
+    birdSightings.Add(4, 0);
+    birdSightings.Add(5, 0);
+    
+    foreach(int bird in arr) {
+        birdSightings[bird] += 1;
+    }
+    int max = birdSightings[5], highestBird = 0;
+    for(int i = 5; i >= 1; i--) {
+        if(birdSightings[i] >= max) {
+            max = birdSightings[i];  
+            highestBird = i;
+        } 
+    }
+    //Console.WriteLine(highestBird);
+    return highestBird;
+}
