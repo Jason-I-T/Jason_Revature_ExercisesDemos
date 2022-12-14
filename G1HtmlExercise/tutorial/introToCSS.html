@@ -21,12 +21,23 @@
       .boxExample {
         width: 200px;
         height: 20px; /* width and height set the size of the content box */
-        padding: 5px 1px 8px 20px; /* set padding to 5 pixels on every side */
-        border: 2px solid green; /* set the border on every side to be 2px wide, solid line, and green background color */
-        margin-top: 10px; /* set the margin on the top to be 10 pixels */
+        padding: 20px 20px 20px 20px; /* set padding to 5 pixels on every side */
+        border: 1px solid black; /* set the border on every side to be 2px wide, solid line, and green background color */
+        margin: 10em auto auto auto; /* set the margin on the top to be 10 pixels */
         /* alternatively, we could use shorthand if we want to apply a margin on all sides:
         margin: 10px; */
+        text-align: center;
       }
+
+      div {color: navy}
+      div.boxExample{background-color: lightsalmon;}
+      div > p {color: darkmagenta}
+      #first {font-size: 32pt;}
+      button:hover { background-color: green;}
+      p ~ ul {color: red}
+      /* * {border: 1px solid blue}*/
+
+
     </style>
     <title>Intro to CSS</title>
   </head>
