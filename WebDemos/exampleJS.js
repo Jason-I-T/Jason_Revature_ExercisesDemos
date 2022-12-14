@@ -79,3 +79,13 @@ try {
 } catch(o) {
     console.log("Error");
 }
+
+// Arrow functions
+let normalFunc = function(arg1, arg2) {
+    return arg1 + arg2;
+}
+
+let arrowFunc = (arg1, arg2) => arg1 + arg2;
+
+console.log(arrowFunc(2,3) + " | " + normalFunc(2, 3))
+console.log(arrowFunc(2, 3) === normalFunc(2, 3))
