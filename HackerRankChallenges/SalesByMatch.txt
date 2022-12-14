@@ -1,0 +1,22 @@
+public static int sockMerchant(int n, List<int> ar)
+{
+    // n is the size of arr
+    // arr has the different color socks
+    // We need to find the pairs... return the # of pairs
+    // Iterate through arr, check if arr[i] is in socks. No? Add it.
+    
+    
+    Dictionary<int, int> socks = new Dictionary<int, int>();
+    foreach(int sockColor in ar) {
+        if(!socks.ContainsKey(sockColor)) socks.Add(sockColor, 1);
+        else socks[sockColor] += 1;
+    }
+    
+    int numberOfPairs = 0;
+    
+    foreach(KeyValuePair<int, int> entry in socks) {
+        numberOfPairs += entry.Value/2;
+    }
+    
+    return numberOfPairs;
+}
