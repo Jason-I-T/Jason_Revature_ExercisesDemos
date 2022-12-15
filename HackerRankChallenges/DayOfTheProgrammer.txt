@@ -1,0 +1,36 @@
+public static string dayOfProgrammer(int year)
+{
+//String for storing the correctly formatted Day of the Programmer
+string programmerDay;
+//Switch to figure out which calender we are using
+switch(year)
+{
+    case < 1918: //Old calender just checks if year divisible by 4
+        if(year % 4 == 0)
+        {
+            //Leap Year date
+            programmerDay = "12.09." + year.ToString();
+        }
+        else
+        {
+            //Regular date
+            programmerDay = "13.09." + year.ToString();
+        }
+        break;
+    case 1918: //Exception
+        programmerDay = "26.09." + year.ToString();
+        break;
+    case > 1918: //New calendar has 2 checks for leap year
+        if( (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0))
+        {
+            //Leap Year date
+            programmerDay = "12.09." + year.ToString();
+        }
+        else
+        {
+            //Regular date
+            programmerDay = "13.09." + year.ToString();
+        }
+        break;
+}
+return programmerDay;
