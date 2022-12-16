@@ -1,0 +1,20 @@
+static string catAndMouse(int x, int y, int z) 
+{
+    //Calculate A's distance to mouse
+    int catADistance = Math.Abs(z-x);
+    //Calcualte B's distance to mouse
+    int catBDistance = Math.Abs(z-y);
+    //Check who gets there first
+    if(catADistance == catBDistance) //If they are same distance, mouse wins
+    {
+        return "Mouse C";
+    }
+    else if(catADistance > catBDistance) //If cat A is farther, B wins
+    {
+        return "Cat B";
+    }
+    else //If B is farther, A wins
+    {
+        return "Cat A";
+    }
+}
