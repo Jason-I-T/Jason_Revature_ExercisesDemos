@@ -11,6 +11,9 @@ import { MessageService } from './message.service';
 })
 export class HeroService {
   private heroesUrl = 'api/heroes';  // URL to web api
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  }
   constructor(
     private http: HttpClient,
     private messageService: MessageService) { }
@@ -35,6 +38,14 @@ export class HeroService {
       tap(_ => this.log(`GET request for ${url} successful`)),
       catchError(this.handleError<Hero>(`getHero(${id})`))
     );
+  }
+
+  updateHero(hero: Hero): Observable<any> {
+    return this.http.put(this.heroesUrl, hero, this.httpOptions)
+      .pipe(
+        tap(_ => this.log(`PUT request for ${hero.name} successful`)),
+        catchError(this.handleError<any>('updateHero'))
+      );
   }
 
   /** Log a HeroService message with the MessageService */
